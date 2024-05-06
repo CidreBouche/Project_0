@@ -2,12 +2,10 @@
 #  Author : Baptiste Durand  #
 # ========================== #
 
-def tb_generator():
-    ADDER_LENGTH = 2
-
+def tb_generator(ADDER_LENGTH, number_of_tabs):
     s = ""
-
-    indent = "\t\t"
+    
+    indent = ' ' * number_of_tabs
     
     time_to_wait = 100
     waiter = f"wait for {time_to_wait} ns;"
@@ -24,6 +22,3 @@ def tb_generator():
         if case_number != 2**(ADDER_LENGTH*2) - 1: s += "\n"
 
     return s
-
-
-    

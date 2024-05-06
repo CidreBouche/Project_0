@@ -2,14 +2,14 @@
 #  Author : Baptiste Durand  #
 # ========================== #
 
-include ../common/common.mk
+include ../common/common_utils/common.mk
 
 
 .PHONY: all clean
 
 clean:
 	@$(RM) -r result/
-	# @$(RM) -r *__pycache__
+	@$(RM) -r script/__pycache__
 
 all: clean check_result_dir copy_tb build_tb
 
