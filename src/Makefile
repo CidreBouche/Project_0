@@ -11,15 +11,15 @@ clean:
 	@$(RM) -r result/
 	@$(RM) -r script/__pycache__
 
-all: copy_tb build_tb
+all: copy_src build_src
 
 check_result_dir:
 	@if [ ! -d "result" ]; then \
 		mkdir result/; \
 	fi
 
-copy_tb: check_result_dir
+copy_src: check_result_dir
 	@cp src/* result/
 
-build_tb: check_result_dir
-	@python3 script/tb_builder.py
+build_src: check_result_dir
+	@python3 script/src_builder.py

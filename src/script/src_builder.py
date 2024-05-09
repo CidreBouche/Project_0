@@ -5,7 +5,6 @@
 import os
 import json
 
-from tb_generator import tb_generator
 import common 
 
 
@@ -13,10 +12,10 @@ def __main__():
     # Path to PROJECT_0
     TOP_DIR = os.path.join("../")
 
-    # Path to tb/template/
-    TEMPLATE_DIR = os.path.join(TOP_DIR, "tb", "template/")
-    # Path to tb/result/
-    RESULT_DIR = os.path.join(TOP_DIR, "tb", "result/")
+    # Path to src/template/
+    TEMPLATE_DIR = os.path.join(TOP_DIR, "src", "template/")
+    # Path to src/result/
+    RESULT_DIR = os.path.join(TOP_DIR, "src", "result/")
     
     # Load config.json file
     try:
@@ -38,13 +37,9 @@ def __main__():
         with open(TEMPLATE_DIR + template_name, 'r') as template:
             template_content = template.read()
 
-        number_of_spaces = common.get_number_of_spaces(template_content, '$(input_waves)')
-        # Call of the tb_generator method
-        tb_content = tb_generator(ADDER_LENGTH, number_of_spaces)
-
         # In the %content%, replace the %'word to replace'% by the %replacement% and put the result in the %output% variable
         # output = replace_placeholder(%content%, {'word to replace': replacement})
-        output = common.replace_placeholder(template_content, {'input_waves': tb_content, 'ADDER_LENGTH': str(ADDER_LENGTH)})
+        output = common.replace_placeholder(template_content, {'ADDER_LENGTH': str(ADDER_LENGTH)})
     
         # Create the resulting file
         with open(RESULT_DIR + result_name, 'w') as result_file:
