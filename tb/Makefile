@@ -13,6 +13,7 @@ clean:
 
 all: copy_tb build_tb
 
+
 check_result_dir:
 	@if [ ! -d "result" ]; then \
 		mkdir result/; \

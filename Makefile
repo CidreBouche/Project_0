@@ -12,6 +12,7 @@ clean:
 	@$(MAKE) -C tb/ clean
 
 super_clean: clean
+	@$(MAKE) -C delivery/ super_clean
 	@$(RM) -r outcoming/
 
 all: 
@@ -19,6 +20,8 @@ all:
 	# @$(MAKE) behavioral_sim
 	# @$(MAKE) syn
 	# @$(MAKE) post_syn_sim
+	@$(MAKE) pack
+
 
 elaborate: check_outcoming_dir
 	@$(MAKE) -C src/ all
@@ -42,6 +45,8 @@ post_syn_sim:
 	# Not implemented yet and might never be #
 	# ====================================== #
 
+pack:
+	@$(MAKE) -C delivery/ all
 
 # Insert text here because the following targets are not the same to me than the ones above
 check_outcoming_dir:

@@ -13,6 +13,7 @@ clean:
 
 all: copy_src build_src
 
+
 check_result_dir:
 	@if [ ! -d "result" ]; then \
 		mkdir result/; \
