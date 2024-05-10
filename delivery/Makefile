@@ -20,6 +20,8 @@ all:
 	@$(MAKE) archive
 
 
+### Called by all target ########
+
 check_delivery_dir:
 	@if [ ! -d $(DELIVERY_FOLDER_NAME) ]; then \
 		mkdir $(DELIVERY_FOLDER_NAME); \

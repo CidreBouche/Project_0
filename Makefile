@@ -23,13 +23,14 @@ all:
 	@$(MAKE) pack
 
 
+### Called by all target ########
+
 elaborate: check_outcoming_dir
 	@$(MAKE) -C src/ all
 	@cp src/result/* outcoming/rtl
 	@$(MAKE) -C tb/ all
 	@cp tb/result/* outcoming/tb
 	
-
 behavioral_sim:
 	# ====================================== #
 	# Not implemented yet and might never be #
@@ -48,7 +49,9 @@ post_syn_sim:
 pack:
 	@$(MAKE) -C delivery/ all
 
-# Insert text here because the following targets are not the same to me than the ones above
+
+### Called by sub-all target ########
+
 check_outcoming_dir:
 	@if [ ! -d "outcoming" ]; then \
 		mkdir outcoming; \

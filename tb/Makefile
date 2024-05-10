@@ -14,13 +14,18 @@ clean:
 all: copy_tb build_tb
 
 
-check_result_dir:
-	@if [ ! -d "result" ]; then \
-		mkdir result/; \
-	fi
+### Called by all target ########
 
 copy_tb: check_result_dir
 	@cp src/* result/
 
 build_tb: check_result_dir
 	@python3 script/tb_builder.py
+
+
+### Called by sub-all target ########
+
+check_result_dir:
+	@if [ ! -d "result" ]; then \
+		mkdir result/; \
+	fi

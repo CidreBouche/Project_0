@@ -14,13 +14,18 @@ clean:
 all: copy_src build_src
 
 
-check_result_dir:
-	@if [ ! -d "result" ]; then \
-		mkdir result/; \
-	fi
+### Called by all target ########
 
 copy_src: check_result_dir
 	@cp src/* result/
 
 build_src: check_result_dir
 	@python3 script/src_builder.py
+
+
+### Called by sub-all target ########
+
+check_result_dir:
+	@if [ ! -d "result" ]; then \
+		mkdir result/; \
+	fi
