@@ -2,9 +2,12 @@
 #  Author : Baptiste Durand  #
 # ========================== #
 
+# import os library
 import os
+# import json library
 import json
 
+# import my common.py as a library
 import common 
 
 
@@ -45,4 +48,5 @@ def __main__():
         with open(RESULT_DIR + result_name, 'w') as result_file:
             result_file.write(output)
 
+# call main method
 __main__()

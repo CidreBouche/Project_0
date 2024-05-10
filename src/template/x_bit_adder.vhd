@@ -43,7 +43,9 @@ architecture arch of x_bit_adder is
 
 begin
 
+    -- generate all the sub adders
     gen_adder : for i in 0 to (ADDER_LENGTH - 1) generate
+        -- this adder design is for the bit 0 of the addition
         gen_lower_bits : if i = 0 generate 
             u0 : half_adder_1b port map(a_i => a_i(i), 
                                         b_i => b_i(i), 
@@ -52,6 +54,7 @@ begin
                                         );
         end generate gen_lower_bits;
 
+        -- this adder design is for the bits between the first and the last of the addition
         gen_mid_bits : if i > 0 and i < (ADDER_LENGTH - 1) generate
             ux : full_adder_1b port map(a_i => a_i(i), 
                                         b_i => b_i(i), 
@@ -61,6 +64,7 @@ begin
                                         );
         end generate gen_mid_bits;
 
+        -- this adder design is for the last bit of the addition
         gen_higher_bits : if i = (ADDER_LENGTH - 1) and i /= 0 generate
             uz : full_adder_1b port map(a_i => a_i(i), 
                                         b_i => b_i(i), 

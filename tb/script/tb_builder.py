@@ -2,10 +2,14 @@
 #  Author : Baptiste Durand  #
 # ========================== #
 
+# import os library
 import os
+# import json library
 import json
 
+# import my tb_generator.py as a library and get my tb_generator method from it
 from tb_generator import tb_generator
+# import my common.py as a library
 import common 
 
 
@@ -50,4 +54,5 @@ def __main__():
         with open(RESULT_DIR + result_name, 'w') as result_file:
             result_file.write(output)
 
+# call main method
 __main__()
