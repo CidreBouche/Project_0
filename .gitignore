@@ -3,3 +3,4 @@ __pycache__/
 outcoming/
 delivery/*/
 *.tar.gz
+buffer/
