@@ -5,13 +5,21 @@
 # include common.mk
 include common/common_utils/common.mk
 
+# boolean to indicate if we want to unify the rtl or not (boolean so accepted values are true and false)
+UNIFY ?= true
+# boolean to indicate if we want to obfuscate the rtl or not (boolean so accepted values are true and false)
+OBFUSCATE ?= false
+
 
 # run clean target in child dir
 clean:
 	@$(MAKE) -C src/ clean
 	@$(MAKE) -C tb/ clean
+	@$(MAKE) -C tools/01_manager clean
+	@$(MAKE) -C tools/02_hdl_unifier clean
+	@$(MAKE) -C tools/03_obfuscator clean
 
-# run clean and remove outcoming and delivery dirss
+# run clean and remove outcoming and delivery dirs
 super_clean: clean
 	@$(MAKE) -C delivery/ super_clean
 	@$(RM) -r outcoming/
@@ -22,17 +30,16 @@ all:
 	# @$(MAKE) behavioral_sim
 	# @$(MAKE) syn
 	# @$(MAKE) post_syn_sim
-	@$(MAKE) pack
+	# @$(MAKE) pack
 
 
 ### Called by all target ########
 
 # build everything
-elaborate: check_outcoming_dir
+elaborate: prepare_outcoming_dir
 	@$(MAKE) -C src/ all
-	@cp src/result/* outcoming/rtl
 	@$(MAKE) -C tb/ all
-	@cp tb/result/* outcoming/tb
+	@$(MAKE) -C tools/01_manager all UNIFY=$(UNIFY) OBFUSCATE=$(OBFUSCATE)
 
 # run behavioral sim
 behavioral_sim:
@@ -59,14 +66,11 @@ pack:
 
 ### Called by sub-all target ########
 
-# check if the outcoming dir exist, if it does not, creates it and all it's childs
-check_outcoming_dir:
-	@if [ ! -d "outcoming" ]; then \
-		mkdir outcoming; \
-		mkdir outcoming/rtl; \
-		mkdir outcoming/tb; \
-		mkdir outcoming/doc; \
-	fi
+# make the outcoming dir and it's childs
+prepare_outcoming_dir:
+	mkdir -p outcoming/src
+	mkdir -p outcoming/tb
+	mkdir -p outcoming/doc
 
 
 

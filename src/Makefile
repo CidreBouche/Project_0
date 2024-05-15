@@ -12,24 +12,23 @@ clean:
 	@$(RM) -r script/__pycache__
 
 # run all targets to generate the src
-all: copy_src build_src
-
+all: 
+	@$(MAKE) copy_src
+	@$(MAKE) build_src
 
 ### Called by all target ########
 
 # copy existing src to result folder
-copy_src: check_result_dir
+copy_src: prepare_result_dir
 	@cp src/* result/
 
 # build sources using templates
-build_src: check_result_dir
+build_src: prepare_result_dir
 	@python3 script/src_builder.py
 
 
 ### Called by sub-all target ########
 
-# check if result dir exist, if it does not, creates it
-check_result_dir:
-	@if [ ! -d "result" ]; then \
-		mkdir result/; \
-	fi
+# make the result dir
+prepare_result_dir:
+	@mkdir -p result/

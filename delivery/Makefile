@@ -24,7 +24,7 @@ all:
 ### Called by all target ########
 
 # copy outoming in the delivery directory
-copy_outcoming: check_delivery_dir
+copy_outcoming: prepare_delivery_dir
 	@cp -r ../outcoming/* $(DELIVERY_FOLDER_NAME)
 
 # remove empty directories
@@ -42,8 +42,6 @@ archive:
 
 ### Called by sub-all target ########
 
-# check if delivery directory exist, if it does not, creates it
-check_delivery_dir:
-	@if [ ! -d $(DELIVERY_FOLDER_NAME) ]; then \
-		mkdir $(DELIVERY_FOLDER_NAME); \
-	fi
+# make the delivery dir
+prepare_delivery_dir:
+	@mkdir -p $(DELIVERY_FOLDER_NAME)
