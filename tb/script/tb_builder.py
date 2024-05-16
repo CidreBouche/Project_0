@@ -42,13 +42,20 @@ def __main__():
         with open(TEMPLATE_DIR + template_name, 'r') as template:
             template_content = template.read()
 
+        # Call of the get_number_of_spaces method from common
         number_of_spaces = common.get_number_of_spaces(template_content, '$(input_waves)')
         # Call of the tb_generator method
         tb_content = tb_generator(ADDER_LENGTH, number_of_spaces)
-
+        
+        # define the zeroes variable that contains the good number of zeroes
+        if ADDER_LENGTH == 1:
+            zeroes = "'" + ADDER_LENGTH*'0' + "'"
+        else:
+            zeroes = '"'+ ADDER_LENGTH*'0' + '"'
+        
         # In the %content%, replace the %'word to replace'% by the %replacement% and put the result in the %output% variable
         # output = replace_placeholder(%content%, {'word to replace': replacement})
-        output = common.replace_placeholder(template_content, {'input_waves': tb_content, 'ADDER_LENGTH': str(ADDER_LENGTH)})
+        output = common.replace_placeholder(template_content, {'input_waves': tb_content, 'zeroes': zeroes, 'ADDER_LENGTH': str(ADDER_LENGTH)})
     
         # Create the resulting file
         with open(RESULT_DIR + result_name, 'w') as result_file:

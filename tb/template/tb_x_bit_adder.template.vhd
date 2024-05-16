@@ -2,6 +2,8 @@
 -- Author : Baptiste Durand --
 --==========================--
 
+-- This file is OK
+
 library IEEE;
 use IEEE.std_logic_1164.all;
 
@@ -12,9 +14,9 @@ architecture arch of tb_x_bit_adder is
 
     constant ADDER_LENGTH : integer := $(ADDER_LENGTH);
 
-    signal a_i : std_logic_vector(ADDER_LENGTH - 1 downto 0) := '0';
-    signal b_i : std_logic_vector(ADDER_LENGTH - 1 downto 0) := '0';
-    signal sum_o : std_logic_vector(ADDER_LENGTH - 1 downto 0) := '0';
+    signal a_i : std_logic_vector(ADDER_LENGTH - 1 downto 0) := $(zeroes);
+    signal b_i : std_logic_vector(ADDER_LENGTH - 1 downto 0) := $(zeroes);
+    signal sum_o : std_logic_vector(ADDER_LENGTH - 1 downto 0) := $(zeroes);
     signal overflow : std_logic;
 
     component x_bit_adder is
@@ -37,6 +39,7 @@ begin
     begin
 
         $(input_waves)
+
     end process;
 
 end arch;

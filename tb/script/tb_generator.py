@@ -23,10 +23,10 @@ def tb_generator(ADDER_LENGTH, number_of_tabs):
         b = int(case_number % 2**(ADDER_LENGTH))
         
         # file my string
-        s += indent + waiter + "\n"
-        s += indent + f'a_i <= "{a:0{ADDER_LENGTH}b}";' + "\n"
-        s += indent + f'b_i <= "{b:0{ADDER_LENGTH}b}";' + "\n"
-        # put one more \n as long as it is not the last case
+        s += indent + waiter
+        s += ' ' + f'a_i <= "{a:0{ADDER_LENGTH}b}";'
+        s += ' ' + f'b_i <= "{b:0{ADDER_LENGTH}b}";'
+        # put a \n as long as it is not the last case
         if case_number != 2**(ADDER_LENGTH*2) - 1: s += "\n"
 
     # return the string

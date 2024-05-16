@@ -2,10 +2,13 @@
 -- Author : Baptiste Durand --
 --==========================--
 
+-- This file is OK
+
 library IEEE;
 use IEEE.std_logic_1164.all;
 
--- This file contains the VHDL code of generate a x bit adder starting with a half adder.
+-- This file contains the VHDL template code to generate a x bit adder.
+-- It starts with a half adder and then use full adders.
 
 entity x_bit_adder is
 generic(
