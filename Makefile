@@ -15,7 +15,6 @@ OBFUSCATE ?= false
 clean:
 	@$(MAKE) -C src/ clean
 	@$(MAKE) -C tb/ clean
-	@$(MAKE) -C tools/01_manager clean
 	@$(MAKE) -C tools/02_hdl_unifier clean
 	@$(MAKE) -C tools/03_obfuscator clean
 
@@ -30,7 +29,7 @@ all:
 	# @$(MAKE) behavioral_sim
 	# @$(MAKE) syn
 	# @$(MAKE) post_syn_sim
-	# @$(MAKE) pack
+	@$(MAKE) pack
 
 
 ### Called by all target ########
