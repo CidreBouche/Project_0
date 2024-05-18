@@ -8,15 +8,15 @@ include common/common_utils/common.mk
 # boolean to indicate if we want to unify the rtl or not (boolean so accepted values are true and false)
 UNIFY ?= true
 # boolean to indicate if we want to obfuscate the rtl or not (boolean so accepted values are true and false)
-OBFUSCATE ?= false
+OBFUSCATE ?= true
 
 
 # run clean target in child dir
 clean:
 	@$(MAKE) -C src/ clean
 	@$(MAKE) -C tb/ clean
-	@$(MAKE) -C tools/02_hdl_unifier clean
-	@$(MAKE) -C tools/03_obfuscator clean
+	@$(MAKE) -C tools/01_unifier clean
+	@$(MAKE) -C tools/02_obfuscator clean
 
 # run clean and remove outcoming and delivery dirs
 super_clean: clean
@@ -38,7 +38,9 @@ all:
 elaborate: prepare_outcoming_dir
 	@$(MAKE) -C src/ all
 	@$(MAKE) -C tb/ all
-	@$(MAKE) -C tools/01_manager all UNIFY=$(UNIFY) OBFUSCATE=$(OBFUSCATE)
+	@$(MAKE) -C tools/01_unifier all UNIFY=$(UNIFY)
+	@$(MAKE) -C tools/02_obfuscator all OBFUSCATE=$(OBFUSCATE)
+	@$(MAKE) fill_outcoming
 
 # run behavioral sim
 behavioral_sim:
@@ -65,13 +67,13 @@ pack:
 
 ### Called by sub-all target ########
 
-# make the outcoming dir and it's childs
+# make the outcoming dir
 prepare_outcoming_dir:
-	mkdir -p outcoming/src
-	mkdir -p outcoming/tb
-	mkdir -p outcoming/doc
+	@mkdir outcoming
 
-
+# fill the outcoming
+fill_outcoming:
+	@cp -r $(shell ls -d tools/*/ | sort | tail -n 1 | sed 's:/*$$::')/result/* outcoming/
 
 
 #######################################

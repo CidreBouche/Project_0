@@ -35,7 +35,7 @@ def __main__():
     with open(RESULT_SRC_DIR + RESULTING_FILE_NAME, 'w') as result_file:
         result_file.write(src_content)
         
-        
+    # simply copy the tbs because they do not need to be unified
     os.system("cp -f buffer/tb/* result/tb/")
 
 __main__()
